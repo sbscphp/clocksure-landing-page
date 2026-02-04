@@ -167,10 +167,7 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <ChevronDown className="h-8 w-8 text-[var(--gray-medium)]" />
-      </div>
+    
     </section>
   )
 }

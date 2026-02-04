@@ -4,8 +4,9 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Menu, Clock } from "lucide-react"
+import Image from "next/image"
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -24,7 +25,7 @@ export function Header() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--orange-primary)]">
-            <Clock className="h-5 w-5 text-white" />
+            <Image src="/logo.png" alt="Clocksure" width={36} height={36} className="size-full object-contain" />
           </div>
           <span className="text-xl font-bold text-[var(--gray-charcoal)]">Clocksure</span>
         </Link>
@@ -63,12 +64,13 @@ export function Header() {
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild className="md:hidden">
             <Button variant="ghost" size="icon">
-              <Menu className="h-5 w-5" />
+              <Menu className="size-6" />
               <span className="sr-only">Toggle menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-[300px]">
-            <div className="flex flex-col gap-6 pt-8">
+          <SheetContent side="right" className="w-[80%] p-6">
+            <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+            <div className="flex flex-col gap-6 pt-8 justify-between h-full">
               <nav className="flex flex-col gap-4">
                 {navLinks.map((link) => {
                   const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href))
