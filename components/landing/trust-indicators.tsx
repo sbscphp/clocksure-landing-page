@@ -1,13 +1,8 @@
-"use client"
+"use client";
 
-import { Shield, Clock, Calendar, CreditCard, Headphones, Lock } from "lucide-react"
+import { Clock, CreditCard, Headphones, Lock } from "lucide-react";
 
 const trustItems = [
-  {
-    icon: Calendar,
-    label: "14-Day Free Trial",
-    sublabel: "No Credit Card Required",
-  },
   {
     icon: CreditCard,
     label: "Cancel Anytime",
@@ -18,28 +13,19 @@ const trustItems = [
     label: "99.9% Uptime SLA",
     sublabel: "Enterprise Reliability",
   },
-  {
-    icon: Shield,
-    label: "SOC 2 Compliant",
-    sublabel: "Enterprise Security",
-  },
-  {
-    icon: Lock,
-    label: "GDPR Compliant",
-    sublabel: "Data Privacy",
-  },
+
   {
     icon: Headphones,
     label: "24/7 Support",
     sublabel: "Always Available",
   },
-]
+];
 
 export function TrustIndicators() {
   return (
-    <section className="bg-[var(--gray-light)] py-12 lg:py-16">
+    <section className="bg-[var(--gray-light)]  py-12 lg:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 ">
           {trustItems.map((item) => (
             <div
               key={item.label}
@@ -59,5 +45,5 @@ export function TrustIndicators() {
         </div>
       </div>
     </section>
-  )
+  );
 }

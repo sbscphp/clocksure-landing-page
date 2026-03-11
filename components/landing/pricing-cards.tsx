@@ -1,10 +1,11 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Check } from "lucide-react"
-import Link from "next/link"
+import { useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Check } from "lucide-react";
+import Link from "next/link";
+import { registerLink } from "@/lib/constants";
 
 const pricingPlans = [
   {
@@ -25,6 +26,7 @@ const pricingPlans = [
     ],
     cta: "Get Started",
     highlighted: false,
+    planId: "01JK8B7Y6X5A4H3G2F1E0D9C8B",
   },
   {
     name: "ClockSure Scale",
@@ -46,29 +48,30 @@ const pricingPlans = [
     cta: "Get Started",
     highlighted: true,
     badge: "Most Popular",
+    planId: "01JK8B8M5N4P3Q2R1S0T9V8W7X",
   },
-]
+];
 
 export function PricingCards() {
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef<HTMLDivElement>(null)
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
+          setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
-    )
+      { threshold: 0.1 },
+    );
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+      observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section ref={sectionRef} className="bg-[var(--gray-light)] py-20 lg:py-28">
@@ -79,8 +82,10 @@ export function PricingCards() {
             ClockSure Subscription Pricing
           </p>
           <p className="text-lg text-[var(--gray-medium)] max-w-3xl mx-auto">
-            ClockSure provides a fully white labelled attendance system for your organisation.
-            Every subscription includes a dedicated instance branded with your organisation's logo, including all system generated emails. There are no feature restrictions across plans.
+            ClockSure provides a fully white labelled attendance system for your
+            organisation. Every subscription includes a dedicated instance
+            branded with your organisation's logo, including all system
+            generated emails. There are no feature restrictions across plans.
           </p>
         </div>
 
@@ -94,7 +99,9 @@ export function PricingCards() {
                   ? "border-2 border-[var(--orange-primary)] bg-white shadow-xl scale-105 z-10"
                   : "border border-[var(--border)] bg-white shadow-lg"
               } ${
-                isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                isVisible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-8 opacity-0"
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
@@ -142,7 +149,13 @@ export function PricingCards() {
                       : "bg-[var(--orange-primary)] text-white hover:bg-[var(--orange-dark)]"
                   }`}
                 >
-                  <Link href="/contact">{plan.cta}</Link>
+                  <Link
+                    href={`${registerLink}?planId=${plan.planId}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {plan.cta}
+                  </Link>
                 </Button>
 
                 {/* Features */}
@@ -162,9 +175,7 @@ export function PricingCards() {
             </div>
           ))}
         </div>
-
-       
       </div>
     </section>
-  )
+  );
 }
